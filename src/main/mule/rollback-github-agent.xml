@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<mule xmlns:ee="http://www.mulesoft.org/schema/mule/ee/core" xmlns:http="http://www.mulesoft.org/schema/mule/http"
+	xmlns="http://www.mulesoft.org/schema/mule/core"
+	xmlns:doc="http://www.mulesoft.org/schema/mule/documentation" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.mulesoft.org/schema/mule/core http://www.mulesoft.org/schema/mule/core/current/mule.xsd
+http://www.mulesoft.org/schema/mule/http http://www.mulesoft.org/schema/mule/http/current/mule-http.xsd
+http://www.mulesoft.org/schema/mule/ee/core http://www.mulesoft.org/schema/mule/ee/core/current/mule-ee.xsd">
+	<http:listener-config name="HTTP_Listener_config" doc:name="HTTP Listener config" doc:id="aac834e3-1f88-422a-9871-01c8ed0d0ab5" >
+		<http:listener-connection host="0.0.0.0" port="8081" />
+	</http:listener-config>
+	<flow name="cloudhub2.0-jenkins-pipeline" doc:id="edd8c21c-3d9b-4f1e-8228-93c7d3f1b4b6" >
+		<http:listener doc:name="Listener" doc:id="5b1d9a82-e538-4639-a1aa-7cff29c8b0cb" config-ref="HTTP_Listener_config" path="/test"/>
+		<ee:transform doc:name="Transform Message" doc:id="8562d4bd-947c-4630-bdd9-60c11d1e6d54" >
+			<ee:message >
+				<ee:set-payload ><![CDATA[%dw 2.0
+output application/json
+---
+{
+	"message": "This is sample ci-cd jenkins pipeline."
+}]]></ee:set-payload>
+			</ee:message>
+		</ee:transform>
+		<logger level="INFO" doc:name="Logger" doc:id="cb6e5e14-16e7-4e85-af62-f411d21575fd" message="Hii mule "/>
+		<flow-ref doc:name="Flow Reference" doc:id="2e246e21-d32b-4dec-86c4-e000b366c103" name="cloudhub2.0-jenkins-pipeline-subFlow"/>
+	</flow>
+	<flow name="cloudhub2.0-jenkins-pipeline-subFlow" doc:id="76d37ea5-3364-4625-bd50-773fcc6ce42d" >
+		<ee:transform doc:name="Transform Message" doc:id="8b6d75a9-840f-45aa-8287-b51b37b0137e" >
+			<ee:message >
+				<ee:set-payload ><![CDATA[%dw 2.0
+output application/json
+---
+{
+	"message": "Run Munit test 1"
+}]]></ee:set-payload>
+			</ee:message>
+		</ee:transform>
+	</flow>
+</mule>
