@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<mule xmlns:ee="http://www.mulesoft.org/schema/mule/ee/core" xmlns:http="http://www.mulesoft.org/schema/mule/http"
+	xmlns="http://www.mulesoft.org/schema/mule/core"
+	xmlns:doc="http://www.mulesoft.org/schema/mule/documentation" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.mulesoft.org/schema/mule/core http://www.mulesoft.org/schema/mule/core/current/mule.xsd
+http://www.mulesoft.org/schema/mule/http http://www.mulesoft.org/schema/mule/http/current/mule-http.xsd
+http://www.mulesoft.org/schema/mule/ee/core http://www.mulesoft.org/schema/mule/ee/core/current/mule-ee.xsd">
+	<flow name="bank-loan-dataFlow" doc:id="253bf64a-beb8-44b9-b593-439f172ae7f8" >
+		<http:listener doc:name="Listener" doc:id="b9c95b8b-9bd5-491e-b1c8-5e04d1d1147a" config-ref="HTTP_Listener_config" path="/bank-loan"/>
+		<logger level="INFO" doc:name="Start Query Data" doc:id="74a0103d-4c90-440a-a305-0973c670d464" message="Request comes to get bank loan data"/>
+		<ee:transform doc:name="Sample Bank Data" doc:id="04e871cb-a407-4c53-980d-67a1a4ee0e8b" >
+			<ee:message >
+				<ee:set-payload ><![CDATA[%dw 2.0
+output application/json
+---
+[{
+	"loanId": "LN001",
+	"customerName": "Alice Johnson",
+	"loanType": "Home Loan",
+	"loanAmount": 250000,
+	"interestRate": 6.5,
+	"tenureYears": 15,
+	"status": "Approved"
+},
+  {
+	"loanId": "LN002",
+	"customerName": "Bob Smith",
+	"loanType": "Car Loan",
+	"loanAmount": 15000,
+	"interestRate": 8.0,
+	"tenureYears": 5,
+	"status": "Pending"
+},
+  {
+	"loanId": "LN003",
+	"customerName": "Clara Williams",
+	"loanType": "Personal Loan",
+	"loanAmount": 10000,
+	"interestRate": 12.5,
+	"tenureYears": 3,
+	"status": "Rejected"
+},
+  {
+	"loanId": "LN004",
+	"customerName": "David Brown",
+	"loanType": "Education Loan",
+	"loanAmount": 50000,
+	"interestRate": 7.0,
+	"tenureYears": 7,
+	"status": "Approved"
+}]
+ 
+]]></ee:set-payload>
+			</ee:message>
+		</ee:transform>
+	</flow>
+</mule>
