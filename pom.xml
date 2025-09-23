@@ -38,13 +38,11 @@
 						<provider>MC</provider>
 						<environment>Sandbox</environment>
 						<target>Cloudhub-US-East-2</target>
+						<applicationName>${project.artifactId}</applicationName>
 						<deploymentSettings>
 							<generateDefaultPublicUrl>true</generateDefaultPublicUrl>
 						</deploymentSettings>
-						 <muleVersion>
-							<version>4.8.0</version> <!-- Use supported runtime -->
-							<releaseChannel>EDGE</releaseChannel>
-						</muleVersion>
+						<muleVersion>4.8.0</muleVersion>
 						<server>Repository</server>
 						<applicationName>${project.artifactId}</applicationName>
 						<releaseChannel>NONE</releaseChannel>
