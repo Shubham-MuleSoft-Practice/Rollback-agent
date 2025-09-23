@@ -37,8 +37,14 @@
 						<uri>https://anypoint.mulesoft.com</uri>
 						<provider>MC</provider>
 						<environment>Sandbox</environment>
-						<target>Cloudhub-US-East-2</target>
-						<muleVersion>4.9.9</muleVersion>
+						<deploymentSettings>
+							<region>us-east-2</region> <!-- Correct way to specify region -->
+							<generateDefaultPublicUrl>true</generateDefaultPublicUrl>
+						</deploymentSettings>
+						 <muleVersion>
+							<version>4.8.0</version> <!-- Use supported runtime -->
+							<releaseChannel>EDGE</releaseChannel>
+						</muleVersion>
 						<server>Repository</server>
 						<applicationName>${project.artifactId}</applicationName>
 						<releaseChannel>NONE</releaseChannel>
