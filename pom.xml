@@ -51,10 +51,11 @@
                         <muleVersion>4.9.0</muleVersion>
                         <!-- <releaseChannel>NONE</releaseChannel> -->
                         <replicas>1</replicas>
+                        <password>${pass}</password>
                         <vCores>0.1</vCores>
-                        <deploymentSettings>
+                        <!-- <deploymentSettings>
                             <generateDefaultPublicUrl>true</generateDefaultPublicUrl>
-                        </deploymentSettings>
+                        </deploymentSettings> -->
                     </cloudhub2Deployment>
                 </configuration>
             </plugin>
