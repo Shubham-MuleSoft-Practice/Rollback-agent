@@ -49,7 +49,7 @@
                         <applicationName>${project.artifactId}</applicationName>
 						<server>Repository</server>
                         <muleVersion>4.9.0</muleVersion>
-                        <releaseChannel>NONE</releaseChannel>
+                        <!-- <releaseChannel>NONE</releaseChannel> -->
                         <replicas>1</replicas>
                         <vCores>0.1</vCores>
                         <deploymentSettings>
