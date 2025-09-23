@@ -37,8 +37,8 @@
 						<uri>https://anypoint.mulesoft.com</uri>
 						<provider>MC</provider>
 						<environment>Sandbox</environment>
+						<region>us-east-2</region>
 						<deploymentSettings>
-							<region>us-east-2</region> <!-- Correct way to specify region -->
 							<generateDefaultPublicUrl>true</generateDefaultPublicUrl>
 						</deploymentSettings>
 						 <muleVersion>
