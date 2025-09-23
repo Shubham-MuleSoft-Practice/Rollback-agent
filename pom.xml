@@ -37,7 +37,7 @@
 						<uri>https://anypoint.mulesoft.com</uri>
 						<provider>MC</provider>
 						<environment>Sandbox</environment>
-						<region>us-east-2</region>
+						<target>Cloudhub-US-East-2</target>
 						<deploymentSettings>
 							<generateDefaultPublicUrl>true</generateDefaultPublicUrl>
 						</deploymentSettings>
