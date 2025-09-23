@@ -42,7 +42,7 @@
 						<deploymentSettings>
 							<generateDefaultPublicUrl>true</generateDefaultPublicUrl>
 						</deploymentSettings>
-						<muleVersion>4.8.0</muleVersion>
+						<muleVersion>4.9.7</muleVersion>
 						<server>Repository</server>
 						<applicationName>${project.artifactId}</applicationName>
 						<releaseChannel>NONE</releaseChannel>
