@@ -19,7 +19,7 @@
 
         <!-- Align Mule app runtime and CloudHub deployment runtime -->
         <app.runtime>4.9.7</app.runtime>
-        <mule.maven.plugin.version>4.2.0</mule.maven.plugin.version>
+        <mule.maven.plugin.version>4.1.1</mule.maven.plugin.version>
     </properties>
 
     <build>
@@ -28,7 +28,7 @@
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-clean-plugin</artifactId>
-                <version>3.2.0</version>
+                <version>3.1.0</version>
             </plugin>
 
             <!-- Mule Maven Plugin -->
@@ -39,7 +39,6 @@
                 <extensions>true</extensions>
                 <configuration>
                     <classifier>mule-application</classifier>
-
                     <!-- CloudHub Deployment -->
                     <cloudhub2Deployment>
                         <uri>https://anypoint.mulesoft.com</uri>
@@ -52,9 +51,9 @@
                         <!-- <releaseChannel>NONE</releaseChannel> -->
                         <replicas>1</replicas>
                         <vCores>0.1</vCores>
-                        <deploymentSettings>
+                        <!-- <deploymentSettings>
                             <generateDefaultPublicUrl>true</generateDefaultPublicUrl>
-                        </deploymentSettings>
+                        </deploymentSettings> -->
                     </cloudhub2Deployment>
                 </configuration>
             </plugin>
