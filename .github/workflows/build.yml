@@ -86,17 +86,4 @@ jobs:
             }"
 
           echo "✅ Rollback triggered successfully!"
-          
-          # --- Rollback GitHub repo to last successful commit ---
-          git config user.name "github-actions[bot]"
-          git config user.email "github-actions[bot]@users.noreply.github.com"
-
-          git fetch origin
-
-          # Reset branch to the last successful commit dynamically
-          git reset --hard ${{ steps.last_commit.outputs.last_successful }}
-
-          # Force push the reset branch to origin (warning: rewrites history)
-          git push origin HEAD:main --force
-
-          echo "✅ Git rollback complete to last successful commit: ${{ steps.last_commit.outputs.last_successful }}"
+ 
