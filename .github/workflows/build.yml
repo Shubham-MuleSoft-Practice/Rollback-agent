@@ -67,7 +67,7 @@ jobs:
       - name: Rollback if Health Check Fails
         if: steps.health.outputs.fail == 'true'
         run: |
-          echo "❌ Deployment failed. Rolling back to version: ${{ steps.health.outputs.last_successful }}"
+          echo "Deployment failed. Rolling back to version: ${{ steps.health.outputs.last_successful }}"
           TOKEN=$(curl --silent --location 'https://anypoint.mulesoft.com/accounts/login' \
             --header 'Content-Type: application/json' \
             --data-raw '{
