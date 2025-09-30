@@ -63,3 +63,28 @@ jobs:
           else
             echo "fail=false" >> $GITHUB_OUTPUT
           fi
+
+      - name: Rollback if Health Check Fails
+        if: steps.health.outputs.fail == 'true'
+        run: |
+          echo "❌ Deployment failed. Rolling back to version: ${{ steps.health.outputs.last_successful }}"
+
+         TOKEN=$(curl --silent --location 'https://anypoint.mulesoft.com/accounts/login' \
+            --header 'Content-Type: application/json' \
+            --data-raw '{
+              "username": "Shubh-agentic-practice",
+              "password": "Shubham@123"
+            }' | jq -r '.access_token')
+
+          DEPLOYMENT_URL="https://anypoint.mulesoft.com/amc/application-manager/api/v2/organizations/a06ee080-7d09-4a5a-9993-6ec85695bed5/environments/b559069a-e2ad-4e8a-bb41-2639ec7fbd69/deployments/7f7339cc-3658-48f2-b3c7-afd694cca61b"
+
+          # 🔄 Trigger Rollback to Last Successful Version
+          curl -s -X PATCH "$DEPLOYMENT_URL" \
+            -H "Authorization: Bearer $TOKEN" \
+            -H "Content-Type: application/json" \
+            -d "{
+              \"desiredVersion\": \"${{ steps.health.outputs.last_successful }}\"
+            }"
+
+          echo "✅ Rollback triggered successfully!"
+ 
