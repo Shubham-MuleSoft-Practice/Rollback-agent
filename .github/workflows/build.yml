@@ -30,21 +30,36 @@ jobs:
       #     -Dclient.id="${{ secrets.CONNECTED_APP_CLIENT_ID }}" \
       #     -Dclient.secret="${{ secrets.CONNECTED_APP_CLIENT_SECRET }}"
 
-      - name: Deploy to CloudHub 2.0
-        run: |
-          mvn clean deploy -DmuleDeploy --settings .maven/settings.xml \
-          -Dclient.id="${{ secrets.CONNECTED_APP_CLIENT_ID }}" \
-          -Dclient.secret="${{ secrets.CONNECTED_APP_CLIENT_SECRET }}" 
+      # - name: Deploy to CloudHub 2.0
+      #   run: |
+      #     mvn clean deploy -DmuleDeploy --settings .maven/settings.xml \
+      #     -Dclient.id="${{ secrets.CONNECTED_APP_CLIENT_ID }}" \
+      #     -Dclient.secret="${{ secrets.CONNECTED_APP_CLIENT_SECRET }}" 
 
-      - name: Health Check
+      - name: CloudHub 2.0 Health Check
         id: health
         run: |
-          URL="https://rollback-github-agent-26n77n.5sc6y6-1.usa-e2.cloudhub.io/health"
-          STATUS=$(curl -s -o /dev/null -w "%{http_code}" "$URL")
-          echo "Checking URL: $URL"
-          echo "API status code: $STATUS"
-          if [ "$STATUS" -ne 200 ]; then
+          TOKEN=$(curl --silent --location 'https://anypoint.mulesoft.com/accounts/login' \
+            --header 'Content-Type: application/json' \
+            --data-raw '{
+              "username": "Shubh-agentic-practice",
+              "password": "Shubham@123"
+            }' | jq -r '.access_token')
+
+          DEPLOYMENT_URL="https://anypoint.mulesoft.com/amc/application-manager/api/v2/organizations/a06ee080-7d09-4a5a-9993-6ec85695bed5/environments/b559069a-e2ad-4e8a-bb41-2639ec7fbd69/deployments/7f7339cc-3658-48f2-b3c7-afd694cca61b"
+
+          STATUS=$(curl -s -X GET "$DEPLOYMENT_URL" \
+            -H "Authorization: Bearer $TOKEN" | jq -r '.application.status')
+
+          LAST_SUCCESSFUL=$(curl -s -X GET "$DEPLOYMENT_URL" \
+            -H "Authorization: Bearer $TOKEN" | jq -r '.lastSuccessfulVersion')
+
+          echo "Deployment Status: $STATUS"
+          echo "Last Successful Version: $LAST_SUCCESSFUL"
+
+          if [ "$STATUS" != "RUNNING" ]; then
             echo "fail=true" >> $GITHUB_OUTPUT
+            echo "last_successful=$LAST_SUCCESSFUL" >> $GITHUB_OUTPUT
           else
             echo "fail=false" >> $GITHUB_OUTPUT
           fi
