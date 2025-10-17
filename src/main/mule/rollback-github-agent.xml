@@ -24,6 +24,7 @@ output application/json
 		<flow-ref doc:name="Flow Reference" doc:id="2e246e21-d32b-4dec-86c4-e000b366c103" name="cloudhub2.0-jenkins-pipeline-subFlow"/>
 	</flow>
 	<flow name="cloudhub2.0-jenkins-pipeline-subFlow" doc:id="76d37ea5-3364-4625-bd50-773fcc6ce42d" >
+		<http:request method="GET" doc:name="Request" doc:id="d5a46967-b649-4b69-8670-1a275a2d329a" />
 		<ee:transform doc:name="Transform Message" doc:id="8b6d75a9-840f-45aa-8287-b51b37b0137e" >
 			<ee:message >
 				<ee:set-payload ><![CDATA[%dw 2.0
