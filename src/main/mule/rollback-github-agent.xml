@@ -27,7 +27,7 @@ output application/json
 		<ee:transform doc:name="Transform Message" doc:id="8b6d75a9-840f-45aa-8287-b51b37b0137e" >
 			<ee:message >
 				<ee:set-payload ><![CDATA[%dw 2.0
-output application/jso
+output application/json
 ---
 ]]></ee:set-payload>
 			</ee:message>
